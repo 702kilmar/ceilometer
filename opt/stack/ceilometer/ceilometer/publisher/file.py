@@ -20,7 +20,6 @@ import io
 import logging
 import os
 import sys
-import tempfile
 
 import six
 from six.moves.urllib import parse as urlparse
@@ -300,7 +299,6 @@ class FilePublisher(publisher.ConfigPublisherBase):
         triggering "doRollover" at the same time. Set external
         to be True to make work across multiple processes.
         """
-        tempdir = tempfile.mkdtemp()
         with lockutils.lock(self.conf.host, 'publish-samples-',
                             external=True, lock_path='/tmp/'):
             # e.g. /tmp/publish-samples-hostname as a lock file
